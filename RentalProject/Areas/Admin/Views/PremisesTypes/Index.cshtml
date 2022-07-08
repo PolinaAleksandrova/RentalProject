@@ -27,7 +27,9 @@
         {
             <tr>
                 <td>@item.PremisesType</td>
-                <td>Edit | Details | Delete</td>
+                <td>
+                    <partial name="_ButtonPartial" model="@item.Id" />
+                </td>
             </tr>
         }
     </table>
