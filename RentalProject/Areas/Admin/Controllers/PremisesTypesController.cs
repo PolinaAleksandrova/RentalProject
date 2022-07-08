@@ -15,7 +15,7 @@ namespace RentalProject.Areas.Admin.Controllers
         }
         public IActionResult Index()
         {
-            var data = _db.PremisesTypes.ToList();
+            //var data = _db.PremisesTypes.ToList();
             return View(_db.PremisesTypes.ToList());
         }
     }
