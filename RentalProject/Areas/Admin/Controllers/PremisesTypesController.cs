@@ -45,5 +45,114 @@ namespace RentalProject.Areas.Admin.Controllers
             return View(premisesTypes);
         }
 
+        //GET Edit Action Method
+
+        public ActionResult Edit(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var productType = _db.PremisesTypes.Find(id);
+            if (productType == null)
+            {
+                return NotFound();
+            }
+            return View(productType);
+        }
+
+        //POST Edit Action Method
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(PremisesTypes premisesTypes)
+        {
+            if (ModelState.IsValid)
+            {
+                _db.Update(premisesTypes);
+                await _db.SaveChangesAsync();
+                TempData["edit"] = "Product type has been updated";
+                return RedirectToAction(nameof(Index));
+            }
+
+            return View(premisesTypes);
+        }
+
+        //GET Details Action Method
+
+        public ActionResult Details(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var premisesType = _db.PremisesTypes.Find(id);
+            if (premisesType == null)
+            {
+                return NotFound();
+            }
+            return View(premisesType);
+        }
+
+        //POST Details Action Method
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Details(PremisesTypes premisesType)
+        {
+            return RedirectToAction(nameof(Index));
+
+        }
+
+        //GET Delete Action Method
+
+        public ActionResult Delete(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var productType = _db.PremisesTypes.Find(id);
+            if (productType == null)
+            {
+                return NotFound();
+            }
+            return View(productType);
+        }
+
+        //POST Delete Action Method
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Delete(int? id, PremisesTypes premisesTypes)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            if (id != premisesTypes.Id)
+            {
+                return NotFound();
+            }
+
+            var productType = _db.PremisesTypes.Find(id);
+            if (productType == null)
+            {
+                return NotFound();
+            }
+            if (ModelState.IsValid)
+            {
+                _db.Remove(premisesTypes);
+                await _db.SaveChangesAsync();
+                TempData["delete"] = "Product type has been deleted";
+                return RedirectToAction(nameof(Index));
+            }
+
+            return View(premisesTypes);
+        }
     }
 }
