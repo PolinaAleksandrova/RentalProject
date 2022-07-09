@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using RentalProject.Data;
 using RentalProject.Models;
@@ -10,20 +9,20 @@ using RentalProject.Models;
 namespace RentalProject.Areas.Admin.Controllers
 {
     [Area("Admin")]
- 
-    public class PremisesTypesController : Controller
+    public class SpecialTagController : Controller
     {
+        
         private ApplicationDbContext _db;
 
-        public PremisesTypesController(ApplicationDbContext db)
+        public SpecialTagController(ApplicationDbContext db)
         {
             _db = db;
         }
-        [AllowAnonymous]
+
+        //GET Index Action Method
         public IActionResult Index()
         {
-            //var data = _db.PremisesTypes.ToList();
-            return View(_db.PremisesTypes.ToList());
+            return View(_db.SpecialTags.ToList());
         }
 
         //GET Create Action Method
@@ -37,17 +36,16 @@ namespace RentalProject.Areas.Admin.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(PremisesTypes premisesTypes)
+        public async Task<IActionResult> Create(SpecialTag specialTag)
         {
             if (ModelState.IsValid)
             {
-                _db.PremisesTypes.Add(premisesTypes);
+                _db.SpecialTags.Add(specialTag);
                 await _db.SaveChangesAsync();
-                TempData["save"] = "Product type has been saved";
                 return RedirectToAction(nameof(Index));
             }
 
-            return View(premisesTypes);
+            return View(specialTag);
         }
 
         //GET Edit Action Method
@@ -59,31 +57,29 @@ namespace RentalProject.Areas.Admin.Controllers
                 return NotFound();
             }
 
-            var premisesTypes = _db.PremisesTypes.Find(id);
-            if (premisesTypes == null)
+            var specialTag = _db.SpecialTags.Find(id);
+            if (specialTag == null)
             {
                 return NotFound();
             }
-            return View(premisesTypes);
+            return View(specialTag);
         }
 
         //POST Edit Action Method
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(PremisesTypes premisesTypes)
+        public async Task<IActionResult> Edit(SpecialTag specialTag)
         {
             if (ModelState.IsValid)
             {
-                _db.Update(premisesTypes);
+                _db.Update(specialTag);
                 await _db.SaveChangesAsync();
-                TempData["edit"] = "Product type has been updated";
                 return RedirectToAction(nameof(Index));
             }
 
-            return View(premisesTypes);
+            return View(specialTag);
         }
-
 
         //GET Details Action Method
 
@@ -94,19 +90,19 @@ namespace RentalProject.Areas.Admin.Controllers
                 return NotFound();
             }
 
-            var premisesTypes = _db.PremisesTypes.Find(id);
-            if (premisesTypes == null)
+            var specialTag = _db.SpecialTags.Find(id);
+            if (specialTag == null)
             {
                 return NotFound();
             }
-            return View(premisesTypes);
+            return View(specialTag);
         }
 
         //POST Edit Action Method
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Details(PremisesTypes premisesTypes)
+        public IActionResult Details(SpecialTag specialTag)
         {
             return RedirectToAction(nameof(Index));
 
@@ -121,45 +117,43 @@ namespace RentalProject.Areas.Admin.Controllers
                 return NotFound();
             }
 
-            var premisesTypes = _db.PremisesTypes.Find(id);
-            if (premisesTypes == null)
+            var specialTag = _db.SpecialTags.Find(id);
+            if (specialTag == null)
             {
                 return NotFound();
             }
-            return View(premisesTypes);
+            return View(specialTag);
         }
 
         //POST Delete Action Method
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Delete(int? id, PremisesTypes premisesTypes)
+        public async Task<IActionResult> Delete(int? id, SpecialTag specialTag)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            if (id != premisesTypes.Id)
+            if (id != specialTag.Id)
             {
                 return NotFound();
             }
 
-            var premisesType = _db.PremisesTypes.Find(id);
-            if (premisesType == null)
+            var specialTags = _db.SpecialTags.Find(id);
+            if (specialTags == null)
             {
                 return NotFound();
             }
             if (ModelState.IsValid)
             {
-                _db.Remove(premisesType);
+                _db.Remove(specialTags);
                 await _db.SaveChangesAsync();
-                TempData["delete"] = "Product type has been deleted";
                 return RedirectToAction(nameof(Index));
             }
 
-            return View(premisesTypes);
+            return View(specialTag);
         }
-
     }
 }
