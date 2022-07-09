@@ -14,6 +14,7 @@ namespace RentalProject.Data
         {
         }
         public DbSet<PremisesTypes> PremisesTypes { get; set; }
+        public DbSet<SpecialTag> SpecialTags { get; set; }
 
     }
 }
