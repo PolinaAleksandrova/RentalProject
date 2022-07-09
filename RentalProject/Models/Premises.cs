@@ -19,7 +19,7 @@ namespace RentalProject.Models
         [Display(Name = "Premises District")]
         public string PremisesDistrict { get; set; }
         [Required]
-        [Display(Name = "IsEquipAvailable")]
+        [Display(Name = "Availability of equipment")]
         public bool IsEquipAvailable { get; set; }
 
         [Display(Name = "Premises Type")]
