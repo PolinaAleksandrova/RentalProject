@@ -1,4 +1,18 @@
-﻿<!DOCTYPE html>
+﻿@using System.Net.Http
+@using RentalProject.Utility
+@using Microsoft.AspNetCore.Http
+@inject IHttpContextAccessor HttpContextAccessor
+@{
+
+    List<Premises> premises = HttpContextAccessor.HttpContext.Session.Get<List<Premises>>("premises");
+    int count = 0;
+    if (premises==null)
+    {
+        premises=new List<Premises>();
+    }
+    count = premises.Count();
+}
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -43,6 +57,12 @@
                         </li>
                         <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="Admin" asp-controller="Premises" asp-action="Index">Premises</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="Admin" asp-controller="Home" asp-action="Cart">
+                                <i class="fas fa-shopping-cart"></i>
+                              (@count)
+                            </a>
                         </li>
                     </ul>
                     <partial name="_LoginPartial" />
