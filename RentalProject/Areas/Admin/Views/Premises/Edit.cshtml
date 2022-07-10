@@ -1,0 +1,96 @@
+﻿@model RentalProject.Models.Premises
+@{
+    ViewData["Title"] = "Edit";
+}
+<br />
+
+<h2 class="text-info">Edit Premises</h2>
+<form asp-action="Edit" method="post" enctype="multipart/form-data">
+    <div class="p-4 rounded border row">
+        <div asp-validation-summary="ModelOnly" class="text-danger">
+
+        </div>
+        <div class="col-8">
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="Name"></label>
+                </div>
+                <div class="col-8">
+                    <input type="hidden" asp-for="Id"/>
+                    <input asp-for="Name" class="form-control"/>
+                </div>
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="Price"></label>
+                </div>
+                <div class="col-8">
+                    <input asp-for="Price" class="form-control" />
+                </div>
+                <span asp-validation-for="Price" class="text-danger"></span>
+            </div>
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="Image"></label>
+                </div>
+                <div class="col-8">
+                    <input asp-for="Image" class="form-control" type="file" />
+                </div>
+                <span asp-validation-for="Image" class="text-danger"></span>
+            </div>
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="PremisesDistrict"></label>
+                </div>
+                <div class="col-8">
+                    <input asp-for="PremisesDistrict" class="form-control" />
+                </div>
+                <span asp-validation-for="PremisesDistrict" class="text-danger"></span>
+            </div>
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="PremisesTypeId"></label>
+                </div>
+                <div class="col-8">
+                    <select asp-for="PremisesTypeId" asp-items="ViewBag.premisesTypeId" class="form-control"></select>
+                    @*<input asp-for="PremisesTypeId" class="form-control"/>*@
+                </div>
+                <span asp-validation-for="PremisesTypeId" class="text-danger"></span>
+            </div>
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="SpecialTagId"></label>
+                </div>
+                <div class="col-8">
+                    <select asp-for="SpecialTagId" asp-items="ViewBag.TagId" class="form-control"></select>
+                    @*<input asp-for="SpecialTagId" class="form-control" />*@
+                </div>
+                <span asp-validation-for="SpecialTagId" class="text-danger"></span>
+            </div>
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="IsEquipAvailable"></label>
+                </div>
+                <div class="col-8">
+                    <input asp-for="IsEquipAvailable" class="" type="checkbox" />
+                </div>
+                <span asp-validation-for="IsEquipAvailable" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" class="btn btn-primary" value="Update" />
+                <a asp-action="Index" class="btn btn-success">Back to List</a>
+            </div>
+        </div>
+        <div class="col-1"></div>
+        <div class="col-3">
+            <img src="~/@Model.Image" width="100%" height="250px" style="border-radius: 5px;border: 1px solid #efefef"/>
+        </div>
+       
+    </div>
+</form>
+
+@section Scripts{
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+
