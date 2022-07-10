@@ -43,7 +43,7 @@ namespace RentalProject.Areas.Admin.Controllers
             {
                 _db.PremisesTypes.Add(premisesTypes);
                 await _db.SaveChangesAsync();
-                TempData["save"] = "Product type has been saved";
+                TempData["save"] = "Premises type has been saved";
                 return RedirectToAction(nameof(Index));
             }
 
@@ -77,7 +77,7 @@ namespace RentalProject.Areas.Admin.Controllers
             {
                 _db.Update(premisesTypes);
                 await _db.SaveChangesAsync();
-                TempData["edit"] = "Product type has been updated";
+                TempData["edit"] = "Premises type has been updated";
                 return RedirectToAction(nameof(Index));
             }
 
@@ -154,7 +154,7 @@ namespace RentalProject.Areas.Admin.Controllers
             {
                 _db.Remove(premisesType);
                 await _db.SaveChangesAsync();
-                TempData["delete"] = "Product type has been deleted";
+                TempData["delete"] = "Premises type has been deleted";
                 return RedirectToAction(nameof(Index));
             }
 
