@@ -86,7 +86,7 @@ namespace RentalProject.Controllers
 
         //GET Remove action methdo
         [ActionName("Remove")]
-        public IActionResult RemoveToCart(int? id)
+        public IActionResult RemoveToSelection(int? id)
         {
             List<Premises> premises = HttpContext.Session.Get<List<Premises>>("premises");
             if (premises != null)
@@ -118,9 +118,9 @@ namespace RentalProject.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        //GET product Cart action method
+        //GET product Selection action method
 
-        public IActionResult Cart()
+        public IActionResult Selection()
         {
             List<Premises> premises = HttpContext.Session.Get<List<Premises>>("premises");
             if (premises == null)
