@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
+using RentalProject.Data;
 using RentalProject.Models;
 using System;
 using System.Collections.Generic;
@@ -12,16 +14,15 @@ namespace RentalProject.Controllers
     [Area("Customer")]
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        private ApplicationDbContext _db;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ApplicationDbContext db)
         {
-            _logger = logger;
+            _db = db;
         }
-
         public IActionResult Index()
         {
-            return View();
+            return View(_db.Premises.Include(c => c.PremisesTypes).Include(c => c.SpecialTag).ToList());
         }
 
         public IActionResult Privacy()
@@ -33,6 +34,24 @@ namespace RentalProject.Controllers
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+
+        //GET product detail acation method
+
+        public ActionResult Detail(int? id)
+        {
+
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var premises = _db.Premises.Include(c => c.PremisesTypes).FirstOrDefault(c => c.Id == id);
+            if (premises == null)
+            {
+                return NotFound();
+            }
+            return View(premises);
         }
     }
 }
