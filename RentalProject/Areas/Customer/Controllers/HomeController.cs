@@ -1,8 +1,10 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using RentalProject.Data;
 using RentalProject.Models;
+using RentalProject.Utility;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -53,5 +55,80 @@ namespace RentalProject.Controllers
             }
             return View(premises);
         }
+
+
+        //POST product detail acation method
+        [HttpPost]
+        [ActionName("Detail")]
+        public ActionResult PremisesDetail(int? id)
+        {
+            List<Premises> premises = new List<Premises>();
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var room = _db.Premises.Include(c => c.PremisesTypes).FirstOrDefault(c => c.Id == id);
+            if (room == null)
+            {
+                return NotFound();
+            }
+
+            premises = HttpContext.Session.Get<List<Premises>>("premises");
+            if (premises == null)
+            {
+                premises = new List<Premises>();
+            }
+            premises.Add(room);
+            HttpContext.Session.Set("premises", premises);
+            return RedirectToAction(nameof(Index));
+        }
+
+        //GET Remove action methdo
+        [ActionName("Remove")]
+        public IActionResult RemoveToCart(int? id)
+        {
+            List<Premises> premises = HttpContext.Session.Get<List<Premises>>("premises");
+            if (premises != null)
+            {
+                var room = premises.FirstOrDefault(c => c.Id == id);
+                if (room != null)
+                {
+                    premises.Remove(room);
+                    HttpContext.Session.Set("premises", premises);
+                }
+            }
+            return RedirectToAction(nameof(Index));
+        }
+
+        [HttpPost]
+
+        public IActionResult Remove(int? id)
+        {
+            List<Premises> premises = HttpContext.Session.Get<List<Premises>>("premises");
+            if (premises != null)
+            {
+                var room = premises.FirstOrDefault(c => c.Id == id);
+                if (room != null)
+                {
+                    premises.Remove(room);
+                    HttpContext.Session.Set("products", premises);
+                }
+            }
+            return RedirectToAction(nameof(Index));
+        }
+
+        //GET product Cart action method
+
+        public IActionResult Cart()
+        {
+            List<Premises> premises = HttpContext.Session.Get<List<Premises>>("premises");
+            if (premises == null)
+            {
+                premises = new List<Premises>();
+            }
+            return View(premises);
+        }
+
     }
 }
