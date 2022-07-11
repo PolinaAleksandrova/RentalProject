@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using X.PagedList;
 
 namespace RentalProject.Controllers
 {
@@ -22,9 +23,9 @@ namespace RentalProject.Controllers
         {
             _db = db;
         }
-        public IActionResult Index()
+        public IActionResult Index(int? page)
         {
-            return View(_db.Premises.Include(c => c.PremisesTypes).Include(c => c.SpecialTag).ToList());
+            return View(_db.Premises.Include(c => c.PremisesTypes).Include(c => c.SpecialTag).ToList().ToPagedList(page??1,6));
         }
 
         public IActionResult Privacy()
