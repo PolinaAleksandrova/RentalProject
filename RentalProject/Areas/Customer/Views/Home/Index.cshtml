@@ -1,4 +1,6 @@
 ﻿@using RentalProject.Models;
+@using X.PagedList.Mvc.Common
+@using X.PagedList.Mvc.Core
 @model X.PagedList.IPagedList<Premises>
 @{
     ViewData["Title"] = "Home Page";
@@ -13,20 +15,22 @@
                     <h4 class="my-0 font-weight-normal">
                         <label style="font-size: 23px;color: steelblue">@premises.Name</label>
                     </h4>
-                    </div>
+                </div>
                 <img src="~/@premises.Image" alt="Card Image" class="card-img-top" style="height: 300px;"/>
                 <div class="card-header">
                     <div class="d-flex justify-content-between align-items-center">
                         <div class="btn-group">
-                            <label style="font-size: 20px;color: #4ba8ea"><b>Price : @premises.Price</b></label>
+                            <label style="font-size: 20px;color: #a51313"><b>Price : @premises.Price</b></label>
                         </div>
-                        <a asp-action="Detail" asp-controller="Home" asp-route-id="@premises.Id" class="btn btn-outline-primary pull-right ">Details</a>
+                        <a asp-action="Detail" asp-controller="Home" asp-route-id="@premises.Id" class="btn btn-primary pull-right btn-outline-info">Details</a>
                     </div>
                 </div>
             </div>
-         </div>
+        </div>
     }
 </div>
-
+<div>
+    @Html.PagedListPager(Model,c=>Href("~/Customer/Home/Index?page="+c),PagedListRenderOptionsBase.PageNumbersOnly)
+</div>
 
 

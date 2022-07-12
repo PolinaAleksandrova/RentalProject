@@ -6,8 +6,7 @@
     ViewData["Title"] = "Order Details";
 }
 @{
-
-    List<Premises> premises = HttpContextAccessor.HttpContext.Session.Get<List<Premises>>("premises");
+List<Premises> premises = HttpContextAccessor.HttpContext.Session.Get<List<Premises>>("premises");
    
     if (premises == null)
     {
@@ -16,7 +15,6 @@
 
 }
 <br />
-
 <h2 class="text-info">Order Details</h2>
 <form asp-action="" method="post" enctype="multipart/form-data">
     <div class="p-4 rounded border row">
@@ -61,7 +59,7 @@
                     <label asp-for="Email"></label>
                 </div>
                 <div class="col-8">
-                    @*<select asp-for="PremisesTypeId" asp-items="ViewBag.productTypeId" class="form-control"></select>*@
+                    @*<select asp-for="ProductTypeId" asp-items="ViewBag.productTypeId" class="form-control"></select>*@
                     <input asp-for="Email" class="form-control" />
                     <span asp-validation-for="Email" class="text-danger"></span>
                 </div>
@@ -80,6 +78,8 @@
             </div>
 
         </div>
+
+
 
         <div class="col-6">
             <table class="table table-bordered">
@@ -101,7 +101,7 @@
                         <td>@item.Price</td>
                     </tr>
                 }
-                </tbody>
+               </tbody>
             </table>
             <div class="text-right">
                 <h3>Total Price : @premises.Sum(c=>c.Price)</h3>

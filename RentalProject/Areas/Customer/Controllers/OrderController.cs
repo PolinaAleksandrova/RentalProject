@@ -1,11 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using RentalProject.Data;
 using RentalProject.Models;
 using RentalProject.Utility;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace RentalProject.Areas.Customer.Controllers
 {
@@ -40,6 +39,7 @@ namespace RentalProject.Areas.Customer.Controllers
                 {
                     OrderDetails orderDetails = new OrderDetails();
                     orderDetails.PremisesId = room.Id;
+ 
                     anOrder.OrderDetails.Add(orderDetails);
                 }
             }
@@ -48,9 +48,9 @@ namespace RentalProject.Areas.Customer.Controllers
             _db.Orders.Add(anOrder);
             await _db.SaveChangesAsync();
             HttpContext.Session.Set("premises", new List<Premises>());
+
             return View();
         }
-
 
         public string GetOrderNo()
         {

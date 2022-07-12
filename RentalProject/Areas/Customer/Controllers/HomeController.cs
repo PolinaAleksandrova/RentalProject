@@ -1,20 +1,20 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Logging;
-using RentalProject.Data;
-using RentalProject.Models;
-using RentalProject.Utility;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using RentalProject.Data;
+using RentalProject.Models;
+using RentalProject.Utility;
 using X.PagedList;
 
 namespace RentalProject.Controllers
 {
     [Area("Customer")]
+
     public class HomeController : Controller
     {
         private ApplicationDbContext _db;
@@ -23,9 +23,11 @@ namespace RentalProject.Controllers
         {
             _db = db;
         }
+
+
         public IActionResult Index(int? page)
         {
-            return View(_db.Premises.Include(c => c.PremisesTypes).Include(c => c.SpecialTag).ToList().ToPagedList(page??1,6));
+            return View(_db.Premises.Include(c => c.PremisesTypes).Include(c => c.SpecialTag).ToList().ToPagedList(page ?? 1, 9));
         }
 
         public IActionResult Privacy()
@@ -39,7 +41,7 @@ namespace RentalProject.Controllers
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
-        //GET product detail acation method
+        //GET premises detail acation method
 
         public ActionResult Detail(int? id)
         {
@@ -49,16 +51,15 @@ namespace RentalProject.Controllers
                 return NotFound();
             }
 
-            var premises = _db.Premises.Include(c => c.PremisesTypes).FirstOrDefault(c => c.Id == id);
-            if (premises == null)
+            var room = _db.Premises.Include(c => c.PremisesTypes).FirstOrDefault(c => c.Id == id);
+            if (room == null)
             {
                 return NotFound();
             }
-            return View(premises);
+            return View(room);
         }
 
-
-        //POST product detail acation method
+        //POST premises detail acation method
         [HttpPost]
         [ActionName("Detail")]
         public ActionResult PremisesDetail(int? id)
@@ -84,7 +85,6 @@ namespace RentalProject.Controllers
             HttpContext.Session.Set("premises", premises);
             return RedirectToAction(nameof(Index));
         }
-
         //GET Remove action methdo
         [ActionName("Remove")]
         public IActionResult RemoveToSelection(int? id)
@@ -113,13 +113,13 @@ namespace RentalProject.Controllers
                 if (room != null)
                 {
                     premises.Remove(room);
-                    HttpContext.Session.Set("products", premises);
+                    HttpContext.Session.Set("premises", premises);
                 }
             }
             return RedirectToAction(nameof(Index));
         }
 
-        //GET product Selection action method
+        //GET premises Selection action method
 
         public IActionResult Selection()
         {
