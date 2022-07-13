@@ -6,7 +6,8 @@
     ViewData["Title"] = "Order Details";
 }
 @{
-List<Premises> premises = HttpContextAccessor.HttpContext.Session.Get<List<Premises>>("premises");
+
+    List<Premises> premises = HttpContextAccessor.HttpContext.Session.Get<List<Premises>>("premises");
    
     if (premises == null)
     {
@@ -15,6 +16,7 @@ List<Premises> premises = HttpContextAccessor.HttpContext.Session.Get<List<Premi
 
 }
 <br />
+
 <h2 class="text-info">Order Details</h2>
 <form asp-action="" method="post" enctype="multipart/form-data">
     <div class="p-4 rounded border row">
@@ -79,8 +81,6 @@ List<Premises> premises = HttpContextAccessor.HttpContext.Session.Get<List<Premi
 
         </div>
 
-
-
         <div class="col-6">
             <table class="table table-bordered">
                 <thead>
@@ -101,7 +101,7 @@ List<Premises> premises = HttpContextAccessor.HttpContext.Session.Get<List<Premi
                         <td>@item.Price</td>
                     </tr>
                 }
-               </tbody>
+                </tbody>
             </table>
             <div class="text-right">
                 <h3>Total Price : @premises.Sum(c=>c.Price)</h3>
