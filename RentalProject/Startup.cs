@@ -79,7 +79,8 @@ namespace RentalProject
             {
                 endpoints.MapControllerRoute(
                   name: "areas",
-                  pattern: "{area=Customer}/{controller=Home}/{action=Index}/{id?}"
+                  pattern: "{area=Customer}/{controller=Home}/{action=Index}/{id?}",
+                   endpoints.MapRazorPages()
                 );
             });
         }
