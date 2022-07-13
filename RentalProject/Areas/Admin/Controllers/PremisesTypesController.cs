@@ -10,7 +10,7 @@ using RentalProject.Models;
 namespace RentalProject.Areas.Admin.Controllers
 {
     [Area("Admin")]
- 
+    [Authorize]
     public class PremisesTypesController : Controller
     {
         private ApplicationDbContext _db;
@@ -27,7 +27,7 @@ namespace RentalProject.Areas.Admin.Controllers
         }
 
         //GET Create Action Method
-
+     
         public ActionResult Create()
         {
             return View();
@@ -51,7 +51,7 @@ namespace RentalProject.Areas.Admin.Controllers
         }
 
         //GET Edit Action Method
-
+   
         public ActionResult Edit(int? id)
         {
             if (id == null)
