@@ -8,11 +8,13 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Identity.Web.UI;
 using RentalProject.Data;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+
 
 namespace RentalProject
 {
@@ -39,7 +41,8 @@ namespace RentalProject
                 .AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddControllersWithViews();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
-      
+            services.AddRazorPages()
+                    .AddMicrosoftIdentityUI();
             services.AddSession(options =>
             {
                 // Set a short timeout for easy testing.
