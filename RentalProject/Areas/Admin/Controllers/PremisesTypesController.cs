@@ -10,7 +10,7 @@ using RentalProject.Models;
 namespace RentalProject.Areas.Admin.Controllers
 {
     [Area("Admin")]
- 
+    [Authorize(Roles = "Super user")]
     public class PremisesTypesController : Controller
     {
         private ApplicationDbContext _db;
