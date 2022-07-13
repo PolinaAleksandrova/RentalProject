@@ -10,7 +10,7 @@ using RentalProject.Models;
 namespace RentalProject.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    [Authorize]
+ 
     public class SpecialTagController : Controller
     {
         

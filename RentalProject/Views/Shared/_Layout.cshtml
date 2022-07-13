@@ -3,14 +3,15 @@
 @using Microsoft.AspNetCore.Http
 @inject IHttpContextAccessor HttpContextAccessor
 @{
-
-    List<Premises> premises = HttpContextAccessor.HttpContext.Session.Get<List<Premises>>("premises");
+    var userRole = HttpContextAccessor.HttpContext.Session.GetString("roleName");
     int count = 0;
+    List<Premises> premises = HttpContextAccessor.HttpContext.Session.Get<List<Premises>>("premises");
     if (premises==null)
     {
         premises=new List<Premises>();
     }
     count = premises.Count();
+   
 }
 <!DOCTYPE html>
 <html lang="en">

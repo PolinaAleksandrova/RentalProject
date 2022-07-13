@@ -148,7 +148,7 @@ namespace RentalProject.Areas.Identity.Pages.Account.Manage
         {
             return string.Format(
                 AuthenticatorUriFormat,
-                _urlEncoder.Encode("RentalProject"),
+                _urlEncoder.Encode("OnlineShop"),
                 _urlEncoder.Encode(email),
                 unformattedKey);
         }

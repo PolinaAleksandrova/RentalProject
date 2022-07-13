@@ -15,7 +15,7 @@ using RentalProject.Models;
 namespace RentalProject.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    [Authorize]
+   
     public class PremisesController : Controller
     {
         private ApplicationDbContext _db;
