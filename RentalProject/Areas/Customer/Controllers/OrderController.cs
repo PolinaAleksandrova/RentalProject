@@ -18,6 +18,10 @@ namespace RentalProject.Areas.Customer.Controllers
             _db = db;
         }
 
+        public IActionResult FormSubmission()
+        {
+            return View();
+        }
         //GET Checkout actioin method
 
         public IActionResult Checkout()
